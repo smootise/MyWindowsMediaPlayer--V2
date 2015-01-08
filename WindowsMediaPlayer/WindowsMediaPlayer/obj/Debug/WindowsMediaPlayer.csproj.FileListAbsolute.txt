@@ -1,0 +1,13 @@
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.exe.config
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.exe
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.pdb
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.csprojResolveAssemblyReference.cache
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\MainWindow.baml
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\MainWindow.g.cs
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\App.g.cs
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer_MarkupCompile.cache
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.g.resources
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.Properties.Resources.resources
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.csproj.GenerateResource.Cache
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.exe
+c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.pdb
