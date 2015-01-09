@@ -13,18 +13,36 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+using System.Drawing;
+using System.ComponentModel;
 //for messagebox
-using MessageBox = System.Windows.Forms.MessageBox;
+using MessageBox = System.Windows.MessageBox;
+
 
 namespace WindowsMediaPlayer
 {
     public partial class MainWindow : Window
     {
-        private bool MediaReader_Playing = false;
+        private bool            MediaReader_Playing = false;
+        private ImageBrush      brush_play;
+        private ImageBrush      brush_pause;
+        private ImageBrush      brush_load;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            brush_play = new ImageBrush();
+            brush_pause = new ImageBrush();
+            brush_load = new ImageBrush();
+
+            brush_play.ImageSource = new BitmapImage(new Uri("play_button.png", UriKind.Relative));
+            brush_pause.ImageSource = new BitmapImage(new Uri("pause_button.png", UriKind.Relative));
+            brush_load.ImageSource = new BitmapImage(new Uri("load_button.png", UriKind.Relative));
+
+            My_Button_Play.Background = brush_play;
+            My_Button_Load.Background = brush_load;
         }
 
         private void Button_Load(object sender, RoutedEventArgs e)
@@ -51,15 +69,15 @@ namespace WindowsMediaPlayer
                 }
                 MediaReader_Playing = true;
                 MediaReader.Play();
-                My_Button_Play.Content = "Pause"; 
+                MediaReader.Play();
+                My_Button_Play.Background = brush_pause;
             }
             else
             {
                 MediaReader_Playing = false;
                 MediaReader.Pause();
-                My_Button_Play.Content = "Play"; 
+                My_Button_Play.Background = brush_play;
             }
         }
-
     }
 }

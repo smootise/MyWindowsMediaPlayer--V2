@@ -11,3 +11,17 @@ c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\Windo
 c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.csproj.GenerateResource.Cache
 c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.exe
 c:\users\corentin\documents\visual studio 2013\Projects\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.pdb
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.exe.config
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.exe
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.pdb
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.csprojResolveAssemblyReference.cache
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\MainWindow.baml
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\MainWindow.g.cs
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\App.g.cs
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer_MarkupCompile.cache
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.g.resources
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.Properties.Resources.resources
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.csproj.GenerateResource.Cache
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.exe
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.pdb
+D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer_Content.g.cs
