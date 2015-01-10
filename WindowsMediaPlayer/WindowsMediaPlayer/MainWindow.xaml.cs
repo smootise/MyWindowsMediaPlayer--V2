@@ -28,6 +28,7 @@ namespace WindowsMediaPlayer
         private ImageBrush      brush_play;
         private ImageBrush      brush_pause;
         private ImageBrush      brush_load;
+        private ImageBrush      brush_stop;
 
         public MainWindow()
         {
@@ -36,13 +37,18 @@ namespace WindowsMediaPlayer
             brush_play = new ImageBrush();
             brush_pause = new ImageBrush();
             brush_load = new ImageBrush();
+            brush_stop = new ImageBrush();
 
             brush_play.ImageSource = new BitmapImage(new Uri("play_button.png", UriKind.Relative));
             brush_pause.ImageSource = new BitmapImage(new Uri("pause_button.png", UriKind.Relative));
             brush_load.ImageSource = new BitmapImage(new Uri("load_button.png", UriKind.Relative));
+            brush_stop.ImageSource = new BitmapImage(new Uri("stop_button.png", UriKind.Relative));
 
             My_Button_Play.Background = brush_play;
             My_Button_Load.Background = brush_load;
+            My_Button_Stop.Background = brush_stop;
+            if (My_Playist.Items.Count == 0)
+                My_Text_No_Playlist.Content = "Your playlist" + Environment.NewLine + "   is empty.";
         }
 
         private void Button_Load(object sender, RoutedEventArgs e)
@@ -79,5 +85,17 @@ namespace WindowsMediaPlayer
                 My_Button_Play.Background = brush_play;
             }
         }
+
+        private void Button_Stop(object sender, RoutedEventArgs e)
+        {
+            MediaReader_Playing = false;
+            MediaReader.Stop();
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
     }
 }
