@@ -25,3 +25,17 @@ D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Deb
 D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.exe
 D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.pdb
 D:\Github\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer_Content.g.cs
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.exe.config
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.exe
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.pdb
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.exe
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\bin\Debug\WindowsMediaPlayer.pdb
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.csprojResolveAssemblyReference.cache
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\MainWindow.baml
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\MainWindow.g.cs
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\App.g.cs
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer_Content.g.cs
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer_MarkupCompile.cache
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.g.resources
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.Properties.Resources.resources
+C:\Users\Thibaud\Documents\GitHub\MyWindowsMediaPlayer--V2\WindowsMediaPlayer\WindowsMediaPlayer\obj\Debug\WindowsMediaPlayer.csproj.GenerateResource.Cache
