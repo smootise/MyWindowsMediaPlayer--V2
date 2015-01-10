@@ -18,6 +18,7 @@ using System.Drawing;
 using System.ComponentModel;
 //for messagebox
 using MessageBox = System.Windows.MessageBox;
+using ListBox = System.Windows.Forms.ListBox;
 
 
 namespace WindowsMediaPlayer
@@ -29,6 +30,7 @@ namespace WindowsMediaPlayer
         private ImageBrush      brush_pause;
         private ImageBrush      brush_load;
         private ImageBrush      brush_stop;
+        private List<string>    _playlist_items = new List<string>();
 
         public MainWindow()
         {
@@ -62,6 +64,11 @@ namespace WindowsMediaPlayer
             ofd.ShowDialog();
 
             MediaReader.Source = new Uri(ofd.FileName);
+
+            //playlist related
+            My_Playist.Items.Add(ofd.FileName.Substring(ofd.FileName.LastIndexOf('\\') + 1));
+            _playlist_items.Add(ofd.FileName);
+            My_Text_No_Playlist.Content = "";
         }
 
         private void Button_Play(object sender, RoutedEventArgs e)
@@ -89,13 +96,18 @@ namespace WindowsMediaPlayer
         private void Button_Stop(object sender, RoutedEventArgs e)
         {
             MediaReader_Playing = false;
+            My_Button_Play.Background = brush_play;
             MediaReader.Stop();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-        }
+            string      sel_item = My_Playist.SelectedItem.ToString();
 
+            //load le media
+            MediaReader.Source = new Uri(_playlist_items.ElementAt(My_Playist.Items.IndexOf(sel_item)));
+            MediaReader_Playing = false;
+            My_Button_Play.Background = brush_play;
+        }
     }
 }
