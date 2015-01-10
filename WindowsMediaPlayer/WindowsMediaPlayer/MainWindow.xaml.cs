@@ -16,6 +16,11 @@ using System.Windows.Shapes;
 
 using System.Drawing;
 using System.ComponentModel;
+
+//test
+using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
+
 //for messagebox
 using MessageBox = System.Windows.MessageBox;
 using ListBox = System.Windows.Forms.ListBox;
@@ -26,6 +31,7 @@ namespace WindowsMediaPlayer
     public partial class MainWindow : Window
     {
         private bool            MediaReader_Playing = false;
+        private bool            userIsDraggingSlider = false;
         private ImageBrush      brush_play;
         private ImageBrush      brush_pause;
         private ImageBrush      brush_load;
@@ -51,6 +57,21 @@ namespace WindowsMediaPlayer
             My_Button_Stop.Background = brush_stop;
             if (My_Playist.Items.Count == 0)
                 My_Text_No_Playlist.Content = "Your playlist" + Environment.NewLine + "   is empty.";
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if ((MediaReader.Source != null) && (MediaReader.NaturalDuration.HasTimeSpan) && (!userIsDraggingSlider))
+            {
+                sliProgress.Minimum = 0;
+                sliProgress.Maximum = MediaReader.NaturalDuration.TimeSpan.TotalSeconds;
+                sliProgress.Value = MediaReader.Position.TotalSeconds;
+            }
         }
 
         private void Button_Load(object sender, RoutedEventArgs e)
@@ -109,5 +130,22 @@ namespace WindowsMediaPlayer
             MediaReader_Playing = false;
             My_Button_Play.Background = brush_play;
         }
+
+        private void sliProgress_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            userIsDraggingSlider = true;
+        }
+
+        private void sliProgress_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            userIsDraggingSlider = false;
+            MediaReader.Position = TimeSpan.FromSeconds(sliProgress.Value);
+        }
+
+        private void sliProgress_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
+        }
+
     }
 }

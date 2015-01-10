@@ -4,12 +4,34 @@
         
         Title="MyWindowsMediaPlayer" Height="400" Width="750">
     <Grid Margin="0,0,0,0">
-        <MediaElement x:Name="MediaReader" Height="300" VerticalAlignment="Top" Margin="0,0,0,0" HorizontalAlignment="Left"  Width="600"  LoadedBehavior="Manual" Stretch="Fill"  UnloadedBehavior="Manual"/>
+        <MediaElement x:Name="MediaReader" Height="275" VerticalAlignment="Top" Margin="0,0,0,0" HorizontalAlignment="Left"  Width="600"  LoadedBehavior="Manual" Stretch="Fill"  UnloadedBehavior="Manual"/>
         <Button Name="My_Button_Play" HorizontalAlignment="left" VerticalAlignment="Center" Width="40" Height="40" Margin="280,300,0,0" Click="Button_Play" BorderBrush="Black" Focusable="False"/>
         <Button Name="My_Button_Load" HorizontalAlignment="Left" VerticalAlignment="center" Width="40" Height="40" Margin="20,300,0,0" Click="Button_Load" Focusable="False"/>
         <Button Name="My_Button_Stop" HorizontalAlignment="Left" VerticalAlignment="center" Width="25" Height="25" Margin="230,300,0,0" Click="Button_Stop" Focusable="False"/>
         <Label Name="My_Text_No_Playlist" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="center" Width="120" Margin="612,174,12,148" Panel.ZIndex="1" ClipToBounds="True" Foreground="#FF323DB2"/>
         <ListBox Name="My_Playist" HorizontalAlignment="Left" Height="372" Margin="600,0,0,0" VerticalAlignment="Top" Width="144" SelectionChanged="ListBox_SelectionChanged" Background="#FFA5D6F8"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="72" Margin="0,300,0,0" VerticalAlignment="Top" Width="600" Panel.ZIndex="-1" Background="#FF5F77F6"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="0,275,0,0" VerticalAlignment="Top" Width="600" Panel.ZIndex="-1" Background="#FF5F77F6">
+
+            <StatusBar Grid.Row="2" Height="28" Margin="0, 0, 0, 70">
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+                <StatusBarItem>
+                    <TextBlock Name="lblProgressStatus">00:00:00</TextBlock>
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Center" Margin="0.4,0">
+                    <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" RenderTransformOrigin="2.333,0.639" Width="538" Height="25"/>
+                </StatusBarItem>
+
+            </StatusBar>
+        </Border>
     </Grid>
 </Window>
