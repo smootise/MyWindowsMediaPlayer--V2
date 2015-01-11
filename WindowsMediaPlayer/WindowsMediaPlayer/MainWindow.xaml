@@ -57,7 +57,9 @@
         <MediaElement x:Name="MediaReader" Height="275" VerticalAlignment="Top" Margin="0,0,0,0" HorizontalAlignment="Left"  Width="600"  LoadedBehavior="Manual" Stretch="Fill"  UnloadedBehavior="Manual"/>
         <Button x:Name="My_Button_Play" HorizontalAlignment="left" VerticalAlignment="Center" Width="40" Height="40" Margin="280,300,0,0" Click="Button_Play" BorderBrush="Black" Focusable="False"/>
         <Button x:Name="My_Button_Load" HorizontalAlignment="Left" VerticalAlignment="center" Width="40" Height="40" Margin="20,300,0,0" Click="Button_Load" Focusable="False"/>
-        <Button x:Name="My_Button_Stop" HorizontalAlignment="Left" VerticalAlignment="center" Width="25" Height="25" Margin="230,300,0,0" Click="Button_Stop" Focusable="False"/>
+        <Button x:Name="My_Button_Stop" HorizontalAlignment="Left" VerticalAlignment="center" Width="25" Height="25" Margin="180,300,0,0" Click="Button_Stop" Focusable="False"/>
+        <Button x:Name="My_Button_Prev" HorizontalAlignment="Left" VerticalAlignment="center" Width="25" Height="25" Margin="240,300,0,0" Click="Button_Prev" Focusable="False"/>
+        <Button x:Name="My_Button_Next" HorizontalAlignment="Left" VerticalAlignment="center" Width="25" Height="25" Margin="340,300,0,0" Click="Button_Next" Focusable="False"/>
         <Label x:Name="My_Text_No_Playlist" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="center" Width="120" Margin="612,174,12,148" Panel.ZIndex="1" ClipToBounds="True" Foreground="#FF323DB2"/>
         <ListBox x:Name="My_Playist" HorizontalAlignment="Left" Height="372" Margin="600,0,0,0" VerticalAlignment="Top" Width="144" SelectionChanged="ListBox_SelectionChanged" Background="#FFA5D6F8"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="0,275,0,0" VerticalAlignment="Top" Width="600" Panel.ZIndex="-1" Background="#FF5F77F6">
