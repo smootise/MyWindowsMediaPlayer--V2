@@ -53,18 +53,18 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Margin="0,0,0,0">
-        <MediaElement x:Name="MediaReader" Height="270" VerticalAlignment="Top" Margin="0,0,0,0" HorizontalAlignment="Left"  Width="600"  LoadedBehavior="Manual" Stretch="Fill"  UnloadedBehavior="Manual"/>
-        <Button x:Name="My_Button_Play" HorizontalAlignment="left" VerticalAlignment="Center" Width="40" Height="40" Margin="280,300,0,0" Click="Button_Play" BorderBrush="Black" Focusable="False"/>
-        <Button x:Name="My_Button_Load" HorizontalAlignment="Left" VerticalAlignment="center" Width="40" Height="40" Margin="20,300,0,0" Click="Button_Load" Focusable="False"/>
-        <Button x:Name="My_Button_Stop" HorizontalAlignment="Left" VerticalAlignment="center" Width="25" Height="25" Margin="180,300,0,0" Click="Button_Stop" Focusable="False"/>
-        <Button x:Name="My_Button_Prev" HorizontalAlignment="Left" VerticalAlignment="center" Width="25" Height="25" Margin="240,300,0,0" Click="Button_Prev" Focusable="False"/>
-        <Button x:Name="My_Button_Next" HorizontalAlignment="Left" VerticalAlignment="center" Width="25" Height="24" Margin="340,324,0,24" Click="Button_Next" Focusable="False"/>
-        <Label x:Name="My_Text_No_Playlist" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="center" Width="120" Margin="612,174,12,148" Panel.ZIndex="1" ClipToBounds="True" Foreground="#FF323DB2"/>
-        <ListBox x:Name="My_Playist" HorizontalAlignment="Right" Height="372" Margin="0,0,0,0" VerticalAlignment="Top" Width="144" SelectionChanged="ListBox_SelectionChanged" Background="#FFA5D6F8"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="0,0,0,0" VerticalAlignment="Bottom"  Width="600" Panel.ZIndex="-1" Background="#FF5F77F6">
+    <Grid>
+        <MediaElement x:Name="MediaReader" Margin="0,0,144,97"  LoadedBehavior="Manual" Stretch="Fill"  UnloadedBehavior="Manual"/>
+        <Button x:Name="My_Button_Play" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="40" Height="40" Margin="0,0,140,16" Click="Button_Play" BorderBrush="Black" Focusable="False"/>
+        <Button x:Name="My_Button_Load" VerticalAlignment="Bottom" Height="40" Margin="20,0,0,16" Click="Button_Load" Focusable="False" HorizontalAlignment="Left" Width="40"/>
+        <Button x:Name="My_Button_Stop" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="25" Height="24" Margin="0,0,380,24" Click="Button_Stop" Focusable="False"/>
+        <Button x:Name="My_Button_Prev" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="25" Height="24" Margin="0,0,260,24" Click="Button_Prev" Focusable="False"/>
+        <Button x:Name="My_Button_Next" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="25" Height="24" Margin="0,0,25,24" Click="Button_Next" Focusable="False"/>
+        <Label x:Name="My_Text_No_Playlist" HorizontalContentAlignment="Center" Margin="0,174,12,148" Panel.ZIndex="1" ClipToBounds="True" Foreground="#FF323DB2" HorizontalAlignment="Right" Width="120"/>
+        <ListBox x:Name="My_Playist" SelectionChanged="ListBox_SelectionChanged" Background="#FFA5D6F8" HorizontalAlignment="Right" Width="144"/>
+        <Border BorderBrush="Black" BorderThickness="1" Height="97" Margin="0,0,144,0" VerticalAlignment="Bottom" Panel.ZIndex="-1" Background="#FF5F77F6">
 
-            <StatusBar Grid.Row="2" Height="28" Margin="0, 0, 0, 70">
+            <StatusBar Grid.Row="2" Height="28" Margin="1.2,-0.8,-0.8,67.2">
                 <StatusBar.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Grid>
@@ -79,19 +79,33 @@
                 <StatusBarItem>
                     <TextBlock x:Name="lblProgressStatus"><Run Text="00:00:00"/></TextBlock>
                 </StatusBarItem>
-                <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Center" Margin="0.4,0">
-                    <Slider x:Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" RenderTransformOrigin="2.333,0.639" Width="538" Height="25"/>
+                <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Center" Margin="0.4,0" Height="28" VerticalAlignment="Top">
+                    <!--<Slider x:Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" RenderTransformOrigin="2.333,0.639" Width="538" Height="25"/> -->
                 </StatusBarItem>
 
             </StatusBar>
         </Border>
-        <ListBox Name="My_ListBox_Musiques" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="200" Margin="0,28,0,0" SelectionChanged="My_ListBox_Musiques_SelectionChanged"/>
-        <ListBox Name="My_ListBox_Films" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="200" Margin="200,28,0,0" SelectionChanged="My_ListBox_Films_SelectionChanged"/>
-        <ListBox Name="My_ListBox_Images" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="192" Margin="400,28,0,0" SelectionChanged="My_ListBox_Images_SelectionChanged"/>
-        <Label Name="My_Text_Musiques" Content="Musiques" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="200" FontSize="15" Foreground="#FF323DB2" Background="Gray"/>
-        <Label Name="My_Text_Films" Content="Films" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="200" FontSize="15" Foreground="#FF323DB2" Margin="200,0,0,0" Background="Gray"/>
-        <Label Name="My_Text_Images" Content="Images" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="192" FontSize="15" Foreground="#FF323DB2" Margin="400,0,0,0" Background="Gray"/>
-        <Button Name="My_Button_Delete" HorizontalAlignment="Left" VerticalAlignment="center" Width="30" Height="30" Margin="520,295,0,24" Click="Button_Delete" Focusable="False"/>
-        <Button Name="My_Button_Send" HorizontalAlignment="Left" VerticalAlignment="center" Width="30" Height="30" Margin="555,295,0,24" Click="Button_Send" Focusable="False"/>
+        <Slider x:Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" RenderTransformOrigin="2.333,0.639" Height="25" Margin="57,0,149,71" VerticalAlignment="Bottom"/>
+        <ListBox Name="My_ListBox_Musiques" Margin="0,57,0,97" SelectionChanged="My_ListBox_Musiques_SelectionChanged" HorizontalAlignment="Left" Width="200" Background="#FFA5D6F8"/>
+        <ListBox Name="My_ListBox_Films" Margin="200,57,344,97" SelectionChanged="My_ListBox_Films_SelectionChanged" Background="#FFA5D6F8"/>
+        <ListBox Name="My_ListBox_Images" Margin="0,57,144,97" SelectionChanged="My_ListBox_Images_SelectionChanged" HorizontalAlignment="Right" Width="200" Background="#FFA5D6F8"/>
+        <Label Name="My_Text_Musiques" Content="Musiques" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="200" FontSize="15" Foreground="#FF323DB2" Background="Gray" Height="30"/>
+        <Label Name="My_Text_Films" Content="Films" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="15" Foreground="#FF323DB2" Margin="200,0,344,0" Background="Gray" Height="30"/>
+        <Label Name="My_Text_Images" Content="Images" HorizontalContentAlignment="Center" VerticalAlignment="Top"  FontSize="15" Foreground="#FF323DB2" Margin="0,0,144,0" Background="Gray" HorizontalAlignment="Right" Width="200"/>
+        <Button Name="My_Button_Delete" VerticalAlignment="Bottom" Height="30" Margin="0,0,194,36" Click="Button_Delete" Focusable="False" HorizontalAlignment="Right" Width="30"/>
+        <Button Name="My_Button_Send" VerticalAlignment="Bottom" Height="30" Margin="0,0,159,36" Click="Button_Send" Focusable="False" HorizontalAlignment="Right" Width="30"/>
+        <Button x:Name="My_Button_Save" VerticalAlignment="Bottom" Height="30" Margin="0,0,159,1" Click="Button_Save" Focusable="False" HorizontalAlignment="Right" Width="30"/>
+        <ComboBox Name ="My_ComboBox" HorizontalAlignment="Left" Margin="80,27,0,0" VerticalAlignment="Top" Width="120" Height="30" FontSize="13" RenderTransformOrigin="0.5,0.5" SelectionChanged="My_ComboBox_SelectionChanged">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                    <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                    <GradientStop Color="Gray" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
+        <Label Name="My_Text_Order_By" Content="Trier par :" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="80" FontSize="15" Foreground="#FF323DB2" Background="Gray" Margin="0,27,0,0" Height="30"/>
+        <TextBox Name ="My_TextBox" Height="30" Margin="200,27,144,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" Background="Gray"/>
     </Grid>
 </Window>

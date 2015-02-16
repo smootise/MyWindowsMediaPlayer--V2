@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <string>C:\Users\Public\Videos\Sample Videos\Koala.jpg</string>
+  <string>C:\Users\Public\Videos\Sample Videos\Lighthouse.jpg</string>
+  <string>C:\Users\Public\Videos\Sample Videos\Chrysanthemum.jpg</string>
 </ArrayOfString>

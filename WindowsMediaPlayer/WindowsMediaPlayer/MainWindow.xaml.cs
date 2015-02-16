@@ -16,8 +16,6 @@ using System.Windows.Shapes;
 
 using System.Drawing;
 using System.ComponentModel;
-
-//test
 using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
 
@@ -32,8 +30,11 @@ namespace WindowsMediaPlayer
     {
         private bool            MediaReader_Playing = false;
         private bool            userIsDraggingSlider = false;
-        private List<string>    _playlist_items = new List<string>();
-        private LibraryStocker  LibStocker = new LibraryStocker();
+        
+        private List<string>                _playlist_items = new List<string>();
+        private LibraryStocker              LibStocker = new LibraryStocker();
+        private LibraryStocker.FileType     CurrFileType = LibraryStocker.FileType.Other;
+        private bool                        Has_been_set = false;
 
         private ImageBrush brush_play;
         private ImageBrush brush_pause;
@@ -43,6 +44,7 @@ namespace WindowsMediaPlayer
         private ImageBrush brush_prev;
         private ImageBrush brush_delete;
         private ImageBrush brush_send;
+        private ImageBrush brush_save;
 
         public MainWindow()
         {
@@ -56,6 +58,7 @@ namespace WindowsMediaPlayer
             brush_prev = new ImageBrush();
             brush_delete = new ImageBrush();
             brush_send = new ImageBrush();
+            brush_save = new ImageBrush();
 
             brush_play.ImageSource = new BitmapImage(new Uri("play_button.png", UriKind.Relative));
             brush_pause.ImageSource = new BitmapImage(new Uri("pause_button.png", UriKind.Relative));
@@ -65,6 +68,7 @@ namespace WindowsMediaPlayer
             brush_prev.ImageSource = new BitmapImage(new Uri("previous_button.png", UriKind.Relative));
             brush_delete.ImageSource = new BitmapImage(new Uri("delete_button.png", UriKind.Relative));
             brush_send.ImageSource = new BitmapImage(new Uri("send_button.png", UriKind.Relative));
+            brush_save.ImageSource = new BitmapImage(new Uri("save_button.png", UriKind.Relative));
 
             My_Button_Play.Background = brush_play;
             My_Button_Load.Background = brush_load;
@@ -73,6 +77,7 @@ namespace WindowsMediaPlayer
             My_Button_Prev.Background = brush_prev;
             My_Button_Delete.Background = brush_delete;
             My_Button_Send.Background = brush_send;
+            My_Button_Save.Background = brush_save;
             if (My_Playist.Items.Count == 0)
                 My_Text_No_Playlist.Content = "Your playlist" + Environment.NewLine + "   is empty.";
 
@@ -82,13 +87,19 @@ namespace WindowsMediaPlayer
             timer.Start();
 
             Bibli_reset();
+            My_ComboBox.Items.Add("Aucun Tri");
+            My_ComboBox.Items.Add("Album");
+            My_ComboBox.Items.Add("Artiste");
+            My_ComboBox.Items.Add("Genre");
+            My_ComboBox.SelectedIndex = 0;
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
             if (_playlist_items.Count >= 1)
                 My_Text_No_Playlist.Content = "";
-
+            
+            //si c'est un films/ une musique
             if ((MediaReader.Source != null) && (MediaReader.NaturalDuration.HasTimeSpan) && (!userIsDraggingSlider))
             {
                 sliProgress.Minimum = 0;
@@ -100,7 +111,7 @@ namespace WindowsMediaPlayer
                     MediaReader.Play();
 
                 // si la vidéo est finie
-                if (MediaReader.Position.TotalSeconds == MediaReader.NaturalDuration.TimeSpan.TotalSeconds)
+                if (MediaReader.Position.TotalSeconds == MediaReader.NaturalDuration.TimeSpan.TotalSeconds && My_Playist.SelectedIndex != -1)
                 {
                     string  sel_item = My_Playist.SelectedItem.ToString();
                     int     pos = My_Playist.Items.IndexOf(sel_item);
@@ -108,6 +119,8 @@ namespace WindowsMediaPlayer
                     if (pos < (My_Playist.Items.Count - 1))
                     {
                         MediaReader.Stop();
+                        CurrFileType = LibraryStocker.getFileType(_playlist_items.ElementAt(pos + 1));
+                        Has_been_set = false;
                         MediaReader.Source = new Uri(_playlist_items.ElementAt(pos + 1));
                         MediaReader_Playing = true;
                         MediaReader.Play();
@@ -115,6 +128,37 @@ namespace WindowsMediaPlayer
                     }
                 }
             }
+            //si c'est une image
+            if (CurrFileType == LibraryStocker.FileType.Picture && (MediaReader.Source != null) && MediaReader_Playing == true)
+            {
+                if (Has_been_set == false)
+                {
+                    sliProgress.Value = -1;
+                    Has_been_set = true;
+                }
+                sliProgress.Minimum = 0;
+                sliProgress.Maximum = 10;
+                sliProgress.Value += 1;
+
+                //si le temps est fini on passe a la suivante
+                if (sliProgress.Value >= 10 && My_Playist.SelectedIndex != -1)
+                {
+                    string sel_item = My_Playist.SelectedItem.ToString();
+                    int pos = My_Playist.Items.IndexOf(sel_item);
+                    //s'il reste au moins un truc a lire dans la playlist
+                    if (pos < (My_Playist.Items.Count - 1))
+                    {
+                        MediaReader.Stop();
+                        CurrFileType = LibraryStocker.getFileType(_playlist_items.ElementAt(pos + 1));
+                        Has_been_set = false;
+                        MediaReader.Source = new Uri(_playlist_items.ElementAt(pos + 1));
+                        MediaReader_Playing = true;
+                        MediaReader.Play();
+                        My_Playist.SelectedIndex = pos + 1;
+                    }
+                }
+            }
+                
         }
 
         private void Button_Load(object sender, RoutedEventArgs e)
@@ -131,6 +175,9 @@ namespace WindowsMediaPlayer
             if (_playlist_items.Contains(ofd.FileName) != false)
                 return ;
             MediaReader.Source = new Uri(ofd.FileName);
+            //file type
+            CurrFileType = LibraryStocker.getFileType(ofd.FileName);
+            Has_been_set = false;
 
             //lucas related
             LibStocker.addMedia(ofd.FileName);
@@ -159,6 +206,7 @@ namespace WindowsMediaPlayer
         private void Button_Stop(object sender, RoutedEventArgs e)
         {
             MediaReader_Playing = false;
+            Has_been_set = false;
             My_Button_Play.Background = brush_play;
             this.Blibli_Set_Visible();
             MediaReader.Stop();
@@ -170,8 +218,11 @@ namespace WindowsMediaPlayer
 
             //load le media
             MediaReader.Source = new Uri(_playlist_items.ElementAt(My_Playist.Items.IndexOf(sel_item)));
-            MediaReader_Playing = false;
-            My_Button_Play.Background = brush_play;
+            CurrFileType = LibraryStocker.getFileType(_playlist_items.ElementAt(My_Playist.Items.IndexOf(sel_item)));
+            Has_been_set = false;
+            
+            /*MediaReader_Playing = false;
+            My_Button_Play.Background = brush_play; */
         }
 
         private void sliProgress_DragStarted(object sender, DragStartedEventArgs e)
@@ -192,18 +243,26 @@ namespace WindowsMediaPlayer
 
         private void Button_Prev(object sender, RoutedEventArgs e)
         {
+            if (My_Playist.SelectedIndex == -1)
+                return;
+
             string  sel_item = My_Playist.SelectedItem.ToString();
             int     pos = My_Playist.Items.IndexOf(sel_item);
 
             if (pos >= 1)
             {
                 MediaReader.Source = new Uri(_playlist_items.ElementAt(pos - 1));
+                CurrFileType = LibraryStocker.getFileType(_playlist_items.ElementAt(pos - 1));
+                Has_been_set = false;
                 My_Playist.SelectedIndex = pos - 1;
             }
         }
 
         private void Button_Next(object sender, RoutedEventArgs e)
         {
+            if (My_Playist.SelectedIndex == -1)
+                return;
+
             string sel_item = My_Playist.SelectedItem.ToString();
             int pos = My_Playist.Items.IndexOf(sel_item);
 
@@ -211,6 +270,8 @@ namespace WindowsMediaPlayer
             if (pos < (My_Playist.Items.Count - 1))
             {
                 MediaReader.Source = new Uri(_playlist_items.ElementAt(pos + 1));
+                CurrFileType = LibraryStocker.getFileType(_playlist_items.ElementAt(pos + 1));
+                Has_been_set = false;
                 My_Playist.SelectedIndex = pos + 1;
             }
         }
@@ -224,6 +285,14 @@ namespace WindowsMediaPlayer
             My_ListBox_Musiques.Visibility = Visibility.Hidden;
             My_ListBox_Films.Visibility = Visibility.Hidden;
             My_ListBox_Images.Visibility = Visibility.Hidden;
+
+            My_Text_Order_By.Visibility = Visibility.Hidden;
+            My_TextBox.Visibility = Visibility.Hidden;
+            My_ComboBox.Visibility = Visibility.Hidden;
+
+            My_ListBox_Musiques.SelectedIndex = -1;
+            My_ListBox_Films.SelectedIndex = -1;
+            My_ListBox_Images.SelectedIndex = -1;
         }
 
         private void Blibli_Set_Visible()
@@ -236,6 +305,10 @@ namespace WindowsMediaPlayer
             My_ListBox_Musiques.Visibility = Visibility.Visible;
             My_ListBox_Films.Visibility = Visibility.Visible;
             My_ListBox_Images.Visibility = Visibility.Visible;
+
+            My_Text_Order_By.Visibility = Visibility.Visible;
+            My_TextBox.Visibility = Visibility.Visible;
+            My_ComboBox.Visibility = Visibility.Visible;
         }
 
         private void Bibli_reset()
@@ -294,6 +367,8 @@ namespace WindowsMediaPlayer
             string sel_item = My_ListBox_Images.SelectedItem.ToString();
             //load le media
             MediaReader.Source = new Uri(LibStocker.getfullpath(sel_item));
+            CurrFileType = LibraryStocker.getFileType(LibStocker.getfullpath(sel_item));
+            Has_been_set = false;
         }
 
         private void My_ListBox_Films_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -307,6 +382,8 @@ namespace WindowsMediaPlayer
             string sel_item = My_ListBox_Films.SelectedItem.ToString();
             //load le media
             MediaReader.Source = new Uri(LibStocker.getfullpath(sel_item));
+            CurrFileType = LibraryStocker.getFileType(LibStocker.getfullpath(sel_item));
+            Has_been_set = false;
         }
 
         private void My_ListBox_Musiques_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -320,6 +397,8 @@ namespace WindowsMediaPlayer
             string sel_item = My_ListBox_Musiques.SelectedItem.ToString();
             //load le media
             MediaReader.Source = new Uri(LibStocker.getfullpath(sel_item));
+            CurrFileType = LibraryStocker.getFileType(LibStocker.getfullpath(sel_item));
+            Has_been_set = false;
         }
 
         private void Button_Send(object sender, RoutedEventArgs e)
@@ -354,5 +433,34 @@ namespace WindowsMediaPlayer
             }
         }
 
+        private void Button_Save(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void My_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //rien
+            if (My_ComboBox.SelectedIndex == 0)
+            {
+                My_TextBox.Text = "";
+            }
+            //album
+            if (My_ComboBox.SelectedIndex == 1)
+            {
+                My_TextBox.Text = "Entrer un nom d'album";
+            }
+            //artiste
+            if (My_ComboBox.SelectedIndex == 2)
+            {
+                My_TextBox.Text = "Entrer un nom d'artiste";
+            }
+            //genre
+            if (My_ComboBox.SelectedIndex == 3)
+            {
+                My_TextBox.Text = "Entrer un genre de musique";
+            }
+        }
+        
     }
 }
