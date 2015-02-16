@@ -12,6 +12,18 @@ class LibraryStocker
     protected List<string> listPic = new List<string>();
     protected List<string> listVideo = new List<string>();
     protected bool         isLoad;
+    string                 filterStr;
+
+    public enum Filter
+    {
+        None,
+        Name,
+        Album,
+        Artist,
+        Genre,
+        MissingNo
+    }
+    public Filter filter;
 
     public enum FileType
     {
@@ -24,6 +36,20 @@ class LibraryStocker
     public LibraryStocker()
     {
         isLoad = false;
+        filterStr = "";
+        filter = Filter.None;
+    }
+
+    public void setFilter(string paramStr, Filter paramFilter = Filter.MissingNo)
+    {
+        if (paramFilter != Filter.MissingNo)
+            filter = paramFilter;
+        filterStr = paramStr;
+    }
+
+    public Filter getFilter()
+    {
+        return filter;
     }
 
     public List<string> getPlayList()
@@ -91,25 +117,49 @@ class LibraryStocker
         return (isLoad);
     }
 
+    protected List<string> applyFilter(List<string> toApplyTo)
+    {
+        if (filter == Filter.None)
+            return (toApplyTo);
+        List<string> tmp = new List<string>();
+        tmp.AddRange(toApplyTo);
+        for (int i = 0; i < tmp.Count(); i++)
+        {
+            TagLib.File file = TagLib.File.Create(tmp.ElementAt(i));
+            string toCmp = "";
+            if (filter == Filter.Name)
+                toCmp = file.Tag.Title;
+            else if (filter == Filter.Album)
+                toCmp = file.Tag.Album;
+            else if (filter == Filter.Artist)
+                toCmp = file.Tag.Artist;
+           // else if (filter == Filter.Genre)
+           //     toCmp = file.Tag.Genre;
+            if (toCmp.Contains(filterStr) == false)
+                tmp.Remove(listVideo.ElementAt(i));
+        }
+        return (tmp);
+    }
+
     public List<string> getMusic()
     {
         if (isLoad == false)
             loadFromXml();
-        return (listMusic);
+        return (applyFilter(listMusic));
     }
 
     public List<string> getPic()
     {
         if (isLoad == false)
             loadFromXml();
-        return (listPic);
+        return (applyFilter(listPic));
     }
 
     public List<string> getVideo()
     {
         if (isLoad == false)
             loadFromXml();
-        return (listVideo);
+        return (applyFilter(listVideo));
     }
 
     public static FileType getFileType(string param)
